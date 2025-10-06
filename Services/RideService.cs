@@ -21,12 +21,9 @@ namespace RideSphere.Services
 
         public Driver FindNearestDriver(Location riderPickup)
         {
-            var available = _drivers.Where(d => d.IsAvailable).ToList();
-            if (!available.Any()) return null;
-
-            return available
-                .OrderBy(d => DistanceCalculator.Haversine(d.CurrentLocation, riderPickup))
-                .First();
+            
+            var nearestDrivers = KNNFinder.FindNearestDrivers(_drivers, riderPickup, 3);
+            return nearestDrivers.FirstOrDefault();
         }
 
         public void BookRide(Rider rider)

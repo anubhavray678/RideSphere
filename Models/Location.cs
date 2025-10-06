@@ -8,13 +8,16 @@ namespace RideSphere.Models
 {
     public class Location
     {
-        public double Latitude { get; }
-        public double Longitude { get; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public int NodeId { get; set; } 
 
-        public Location(double latitude, double longitude)
+        public Location(double lat, double lon, int nodeId = -1)
         {
-            Latitude = latitude;
-            Longitude = longitude;
+            Latitude = lat;
+            Longitude = lon;
+            NodeId = nodeId;
         }
     }
+
 }

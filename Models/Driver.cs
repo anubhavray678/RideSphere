@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RideSphere.Models
 {
     public class Driver
     {
-        public string Name { get; }
-        public Location CurrentLocation { get; private set; }
-        public bool IsAvailable { get; private set; }
+        public string Name { get; set; }
+        public Location CurrentLocation { get; set; }
+        public bool IsAvailable { get; set; } = true;
+        public VehicleType Vehicle { get; set; }
 
-        public Driver(string name, Location location)
+        public Driver(string name, Location location, VehicleType vehicle)
         {
             Name = name;
             CurrentLocation = location;
-            IsAvailable = true;
+            Vehicle = vehicle;
         }
 
         public void AssignRide() => IsAvailable = false;
-        public void CompleteRide(Location newLocation)
+        public void CompleteRide(Location dropLocation)
         {
+            CurrentLocation = dropLocation;
             IsAvailable = true;
-            CurrentLocation = newLocation;
         }
+
+        public void CancelRide() => IsAvailable = true;
     }
 }
